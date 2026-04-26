@@ -1,139 +1,781 @@
-<!DOCTYPE HTML>
-<!--
-	Massively by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html>
-	<head>
-		<title>Ahmad S Portfolio</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-	</head>
-	<body class="is-preload">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ahmad — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-		<!-- Wrapper -->
-			<div id="wrapper" class="fade-in">
+  :root {
+    --bg: #0a0a0f;
+    --pink: #ff2d78;
+    --yellow: #ffe135;
+    --cyan: #00f5d4;
+    --purple: #b14aed;
+    --orange: #ff6b2b;
+    --white: #f0eefc;
+    --glass: rgba(255,255,255,0.04);
+    --border: rgba(255,255,255,0.12);
+  }
 
-				<!-- Intro -->
-					<div id="intro">
-						<h1>Ahmad S Portfolio<br />
-						</h1>
-						<p>Data Analyst well versed in SQL, python, PowerBI  <a href="https://github.com/AhmadFalcon555">@ahmad</a>.</p>
-						<ul class="actions">
-							<li><a href="#header" class="button icon solid solo fa-arrow-down scrolly">Continue</a></li>
-						</ul>
-					</div>
+  html, body {
+    width: 100%; height: 100%;
+    background: var(--bg);
+    font-family: 'Space Mono', monospace;
+    color: var(--white);
+    overflow: hidden;
+    cursor: default;
+  }
 
-				<!-- Header -->
-					<header id="header">
-						<a href="index.html" class="logo">Portfolio</a>
-					</header>
+  /* ── DESKTOP ── */
+  #desktop {
+    position: relative;
+    width: 100vw; height: 100vh;
+    overflow: hidden;
+  }
 
-				<!-- Nav -->
-					<nav id="nav">
-						<ul class="links">
-							<li class="active"><a href="index.html">This is Massively</a></li>
+  /* noise grain */
+  #desktop::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.6;
+  }
 
-						</ul>
-						<ul class="icons">
-							<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-							<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-							<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-							<li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
-						</ul>
-					</nav>
+  /* big decorative blobs */
+  .blob {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.18;
+    pointer-events: none;
+    z-index: 0;
+    animation: blobdrift 12s ease-in-out infinite alternate;
+  }
+  .blob-1 { width: 600px; height: 600px; background: var(--pink); top: -200px; left: -100px; animation-delay: 0s; }
+  .blob-2 { width: 500px; height: 500px; background: var(--purple); bottom: -150px; right: -100px; animation-delay: -4s; }
+  .blob-3 { width: 350px; height: 350px; background: var(--cyan); top: 40%; left: 40%; animation-delay: -8s; }
+  @keyframes blobdrift {
+    from { transform: translate(0,0) scale(1); }
+    to   { transform: translate(40px, 30px) scale(1.05); }
+  }
 
-				<!-- Main -->
-					<div id="main">
+  /* ── TASKBAR ── */
+  #taskbar {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    height: 52px;
+    background: rgba(10,10,15,0.85);
+    backdrop-filter: blur(20px);
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    gap: 8px;
+    z-index: 8000;
+  }
 
-						<!-- Featured Post -->
-							<article class="post featured">
-								<header class="major">
-									<h2><a href="#">Data Cleaning in SQL</a></h2>
-									<p>In this project we clean housing datain SQL Server.</p>
-								</header>
-								<a href="#" class="image main"><img src="images/pic01.jpg" alt="" /></a>
-								<ul class="actions special">
-									<li><a href="#" class="button large">View Project</a></li>
-								</ul>
-							</article>
+  #taskbar .tb-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 13px;
+    color: var(--yellow);
+    margin-right: 12px;
+    letter-spacing: 0.05em;
+  }
 
-						<!-- Posts -->
-							<section class="posts">
-								<article>
-									<header>
+  .tb-btn {
+    height: 32px;
+    padding: 0 14px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: var(--glass);
+    color: var(--white);
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    cursor: pointer;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+  .tb-btn:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.3); }
+  .tb-btn.active { border-color: var(--yellow); color: var(--yellow); }
 
-										<h2><a href="#">Data Exploration in SQL<br />
-										</a></h2>
-									</header>
-									<a href="#" class="image fit"><img src="images/pic02.jpg" alt="" /></a>
-									<p>Data exploration of Covid 19 dataset in SQL Server</p>
-									<ul class="actions special">
-										<li><a href="#" class="button">View Project</a></li>
-									</ul>
-								</article>
-								<article>
-									<header>
+  #taskbar .spacer { flex: 1; }
+  #taskbar .clock {
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.05em;
+  }
 
-										<h2><a href="#">TableAU / PowerBI</a></h2>
-									</header>
-									<a href="#" class="image fit"><img src="images/pic03.jpg" alt="" /></a>
-									<p>this is my attempt at using PowerBI for visualization.</p>
-									<ul class="actions special">
-										<li><a href="#" class="button">View Project</a></li>
-									</ul>
-								</article>
-								
-							</section>
+  /* ── WINDOW ── */
+  .win {
+    position: absolute;
+    min-width: 320px;
+    min-height: 200px;
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    background: rgba(12,12,20,0.82);
+    backdrop-filter: blur(30px);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.04) inset;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+    z-index: 100;
+  }
+  .win.focused {
+    box-shadow: 0 40px 100px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.08) inset;
+  }
+  .win.minimized { display: none; }
 
-					</div>
+  /* titlebar */
+  .win-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    cursor: grab;
+    user-select: none;
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+  .win-bar:active { cursor: grabbing; }
 
-				<!-- Footer -->
-					<footer id="footer">
-						
-						<section class="split contact">
-							<section class="alt">
-								<h3>Address</h3>
-								<p>Perum Asabri bumiayu Indah F-16</p>
-							</section>
-							<section>
-								<h3>Phone</h3>
-								<p><a href="#">6282234965079</a></p>
-							</section>
-							<section>
-								<h3>Email</h3>
-								<p><a href="#">AhmadFalcon555</a></p>
-							</section>
-							<section>
-								<h3>Social</h3>
-								<ul class="icons alt">
-									<li><a href="#" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li>
-									<li><a href="#" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
-									<li><a href="#" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
-									<li><a href="#" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
-								</ul>
-							</section>
-						</section>
-					</footer>
+  .win-dot {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: filter 0.15s;
+  }
+  .win-dot:hover { filter: brightness(1.4); }
+  .dot-close  { background: #ff5f57; }
+  .dot-min    { background: #febc2e; }
+  .dot-max    { background: #28c840; }
 
-				<!-- Copyright -->
-					<div id="copyright">
-						<ul><li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
-					</div>
+  .win-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-left: 4px;
+  }
 
-			</div>
+  .win-accent {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    margin-left: auto;
+  }
 
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+  /* content area */
+  .win-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 24px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255,255,255,0.15) transparent;
+  }
 
-	</body>
+  /* resize handle */
+  .win-resize {
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 18px; height: 18px;
+    cursor: nwse-resize;
+    opacity: 0.3;
+  }
+  .win-resize::after {
+    content: '';
+    position: absolute;
+    bottom: 4px; right: 4px;
+    width: 10px; height: 10px;
+    border-right: 2px solid var(--white);
+    border-bottom: 2px solid var(--white);
+    border-radius: 2px;
+  }
+
+  /* ── ABOUT WINDOW ── */
+  .about-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 42px;
+    font-weight: 800;
+    line-height: 1;
+    background: linear-gradient(135deg, var(--pink), var(--yellow), var(--cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 6px;
+  }
+  .about-tag {
+    font-size: 11px;
+    color: var(--cyan);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+  .about-bio {
+    font-size: 13px;
+    line-height: 1.8;
+    color: rgba(240,238,252,0.75);
+    margin-bottom: 20px;
+  }
+  .about-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .pill {
+    padding: 5px 12px;
+    border-radius: 99px;
+    font-size: 11px;
+    border: 1px solid;
+    letter-spacing: 0.05em;
+  }
+  .pill-pink   { border-color: var(--pink);   color: var(--pink); }
+  .pill-cyan   { border-color: var(--cyan);   color: var(--cyan); }
+  .pill-yellow { border-color: var(--yellow); color: var(--yellow); }
+  .pill-purple { border-color: var(--purple); color: var(--purple); }
+  .pill-orange { border-color: var(--orange); color: var(--orange); }
+
+  /* ── PROJECTS WINDOW ── */
+  .proj-card {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 14px;
+    background: rgba(255,255,255,0.03);
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .proj-card:hover { border-color: rgba(255,255,255,0.25); background: rgba(255,255,255,0.06); }
+  .proj-card-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+  .proj-icon {
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  .proj-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+  }
+  .proj-status {
+    margin-left: auto;
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 99px;
+    letter-spacing: 0.05em;
+  }
+  .status-wip  { background: rgba(255,225,53,0.15);  color: var(--yellow); border: 1px solid rgba(255,225,53,0.3); }
+  .status-done { background: rgba(0,245,212,0.12);   color: var(--cyan);   border: 1px solid rgba(0,245,212,0.3); }
+  .proj-desc {
+    font-size: 12px;
+    color: rgba(240,238,252,0.6);
+    line-height: 1.7;
+  }
+  .proj-tags {
+    display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px;
+  }
+  .proj-tag {
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: rgba(255,255,255,0.06);
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.04em;
+  }
+
+  /* ── SKILLS WINDOW ── */
+  .skill-group { margin-bottom: 20px; }
+  .skill-group-label {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 10px;
+  }
+  .skill-bar-row {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 8px;
+  }
+  .skill-bar-name {
+    width: 100px;
+    font-size: 12px;
+    color: rgba(240,238,252,0.8);
+    flex-shrink: 0;
+  }
+  .skill-bar-track {
+    flex: 1; height: 5px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 99px;
+    overflow: hidden;
+  }
+  .skill-bar-fill {
+    height: 100%;
+    border-radius: 99px;
+    animation: barfill 1s ease-out forwards;
+    transform-origin: left;
+  }
+  @keyframes barfill {
+    from { transform: scaleX(0); }
+    to   { transform: scaleX(1); }
+  }
+  .skill-bar-pct {
+    font-size: 10px;
+    color: rgba(255,255,255,0.35);
+    width: 30px;
+    text-align: right;
+  }
+
+  /* ── BLOG WINDOW ── */
+  .blog-post {
+    border-left: 3px solid var(--border);
+    padding: 0 0 20px 16px;
+    margin-bottom: 20px;
+    position: relative;
+  }
+  .blog-post::before {
+    content: '';
+    position: absolute;
+    left: -6px; top: 5px;
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    border: 2px solid;
+  }
+  .blog-post.p1::before { border-color: var(--pink); }
+  .blog-post.p2::before { border-color: var(--cyan); }
+  .blog-post.p3::before { border-color: var(--yellow); }
+  .blog-date {
+    font-size: 10px;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 0.1em;
+    margin-bottom: 6px;
+  }
+  .blog-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+  .blog-excerpt {
+    font-size: 12px;
+    color: rgba(240,238,252,0.55);
+    line-height: 1.7;
+  }
+  .blog-read {
+    display: inline-block;
+    margin-top: 8px;
+    font-size: 11px;
+    color: var(--cyan);
+    cursor: pointer;
+    letter-spacing: 0.05em;
+  }
+  .blog-read:hover { text-decoration: underline; }
+
+  /* ── WELCOME SPLASH ── */
+  #splash {
+    position: fixed; inset: 0;
+    background: var(--bg);
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 16px;
+    z-index: 99999;
+    animation: splashout 0.5s ease-in 1.8s forwards;
+  }
+  @keyframes splashout {
+    to { opacity: 0; pointer-events: none; }
+  }
+  .splash-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 56px;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--pink), var(--yellow), var(--cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: fadein 0.6s ease forwards;
+  }
+  .splash-sub {
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    animation: fadein 0.6s ease 0.3s both;
+  }
+  @keyframes fadein {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* scrollbar */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 99px; }
+
+  /* window entrance */
+  .win { animation: winenter 0.4s cubic-bezier(0.34,1.56,0.64,1) both; }
+  @keyframes winenter {
+    from { opacity: 0; transform: scale(0.92) translateY(16px); }
+    to   { opacity: 1; transform: scale(1) translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<!-- splash -->
+<div id="splash">
+  <div class="splash-name">Ahmad.</div>
+  <div class="splash-sub">Loading portfolio OS...</div>
+</div>
+
+<!-- bg blobs -->
+<div class="blob blob-1"></div>
+<div class="blob blob-2"></div>
+<div class="blob blob-3"></div>
+
+<div id="desktop">
+
+  <!-- ═══ ABOUT WINDOW ═══ -->
+  <div class="win focused" id="win-about" style="width:420px;top:60px;left:80px;animation-delay:2s;">
+    <div class="win-bar" data-win="win-about">
+      <div class="win-dot dot-close" onclick="closeWin('win-about')"></div>
+      <div class="win-dot dot-min"   onclick="minWin('win-about')"></div>
+      <div class="win-dot dot-max"   onclick="maxWin('win-about')"></div>
+      <span class="win-title">about.me</span>
+      <div class="win-accent" style="background:var(--pink)"></div>
+    </div>
+    <div class="win-body">
+      <div class="about-name">Ahmad</div>
+      <div class="about-tag">// developer · creator · learner</div>
+      <p class="about-bio">
+        College student building cool things — websites, games, data pipelines, and whatever else sparks curiosity. Currently studying in Malang, Indonesia, with a long-term goal of living in Japan someday. 🇯🇵
+      </p>
+      <p class="about-bio">
+        I learn best by doing: typing every line of code by hand, asking <em>why</em> before <em>how</em>, and connecting skills to projects I actually care about.
+      </p>
+      <div class="about-pills">
+        <span class="pill pill-pink">Web Dev</span>
+        <span class="pill pill-cyan">Data Analysis</span>
+        <span class="pill pill-yellow">Game Dev</span>
+        <span class="pill pill-purple">Anime Art</span>
+        <span class="pill pill-orange">Japanese</span>
+      </div>
+    </div>
+    <div class="win-resize" data-win="win-about"></div>
+  </div>
+
+  <!-- ═══ PROJECTS WINDOW ═══ -->
+  <div class="win" id="win-projects" style="width:400px;top:80px;left:560px;animation-delay:2.1s;">
+    <div class="win-bar" data-win="win-projects">
+      <div class="win-dot dot-close" onclick="closeWin('win-projects')"></div>
+      <div class="win-dot dot-min"   onclick="minWin('win-projects')"></div>
+      <div class="win-dot dot-max"   onclick="maxWin('win-projects')"></div>
+      <span class="win-title">projects/</span>
+      <div class="win-accent" style="background:var(--cyan)"></div>
+    </div>
+    <div class="win-body">
+
+      <div class="proj-card">
+        <div class="proj-card-top">
+          <div class="proj-icon" style="background:rgba(255,45,120,0.15);">🏫</div>
+          <span class="proj-name">School Website</span>
+          <span class="proj-status status-wip">WIP</span>
+        </div>
+        <p class="proj-desc">Education & news platform built on WordPress with Kadence theme and Gutenberg blocks. Collaborative project helping a real school go online.</p>
+        <div class="proj-tags">
+          <span class="proj-tag">WordPress</span>
+          <span class="proj-tag">Kadence</span>
+          <span class="proj-tag">Gutenberg</span>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-card-top">
+          <div class="proj-icon" style="background:rgba(0,245,212,0.12);">📊</div>
+          <span class="proj-name">VG Sales Analysis</span>
+          <span class="proj-status status-wip">WIP</span>
+        </div>
+        <p class="proj-desc">End-to-end data analysis of a Kaggle video game sales dataset using Python, pandas, MySQL, and Power BI dashboards.</p>
+        <div class="proj-tags">
+          <span class="proj-tag">Python</span>
+          <span class="proj-tag">pandas</span>
+          <span class="proj-tag">MySQL</span>
+          <span class="proj-tag">Power BI</span>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-card-top">
+          <div class="proj-icon" style="background:rgba(177,74,237,0.15);">🎮</div>
+          <span class="proj-name">3D Side-Scroller</span>
+          <span class="proj-status status-wip">WIP</span>
+        </div>
+        <p class="proj-desc">Little Nightmares-inspired Godot 4 game featuring a world-switching mechanic between GLITCHED and PAST states.</p>
+        <div class="proj-tags">
+          <span class="proj-tag">Godot 4</span>
+          <span class="proj-tag">GDScript</span>
+          <span class="proj-tag">3D</span>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-card-top">
+          <div class="proj-icon" style="background:rgba(255,107,43,0.15);">🔍</div>
+          <span class="proj-name">Game Text Scanner</span>
+          <span class="proj-status status-wip">Planned</span>
+        </div>
+        <p class="proj-desc">PC tool using pytesseract to scan in-game text and export to Excel. Built for gamers who need quick data extraction.</p>
+        <div class="proj-tags">
+          <span class="proj-tag">Python</span>
+          <span class="proj-tag">pytesseract</span>
+          <span class="proj-tag">openpyxl</span>
+        </div>
+      </div>
+
+    </div>
+    <div class="win-resize" data-win="win-projects"></div>
+  </div>
+
+  <!-- ═══ SKILLS WINDOW ═══ -->
+  <div class="win" id="win-skills" style="width:360px;top:420px;left:80px;animation-delay:2.2s;">
+    <div class="win-bar" data-win="win-skills">
+      <div class="win-dot dot-close" onclick="closeWin('win-skills')"></div>
+      <div class="win-dot dot-min"   onclick="minWin('win-skills')"></div>
+      <div class="win-dot dot-max"   onclick="maxWin('win-skills')"></div>
+      <span class="win-title">skills.exe</span>
+      <div class="win-accent" style="background:var(--yellow)"></div>
+    </div>
+    <div class="win-body">
+
+      <div class="skill-group">
+        <div class="skill-group-label">// Web & Frontend</div>
+        <div class="skill-bar-row">
+          <span class="skill-bar-name">HTML / CSS</span>
+          <div class="skill-bar-track"><div class="skill-bar-fill" style="width:75%;background:linear-gradient(90deg,var(--pink),var(--purple))"></div></div>
+          <span class="skill-bar-pct">75%</span>
+        </div>
+        <div class="skill-bar-row">
+          <span class="skill-bar-name">JavaScript</span>
+          <div class="skill-bar-track"><div class="skill-bar-fill" style="width:50%;background:linear-gradient(90deg,var(--yellow),var(--orange))"></div></div>
+          <span class="skill-bar-pct">50%</span>
+        </div>
+        <div class="skill-bar-row">
+          <span class="skill-bar-name">WordPress</span>
+          <div class="skill-bar-track"><div class="skill-bar-fill" style="width:60%;background:linear-gradient(90deg,var(--cyan),var(--purple))"></div></div>
+          <span class="skill-bar-pct">60%</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-label">// Data & Backend</div>
+        <div class="skill-bar-row">
+          <span class="skill-bar-name">Python</span>
+          <div class="skill-bar-track"><div class="skill-bar-fill" style="width:55%;background:linear-gradient(90deg,var(--cyan),var(--pink))"></div></div>
+          <span class="skill-bar-pct">55%</span>
+        </div>
+        <div class="skill-bar-row">
+          <span class="skill-bar-name">MySQL</span>
+          <div class="skill-bar-track"><div class="skill-bar-fill" style="width:45%;background:linear-gradient(90deg,var(--orange),var(--yellow))"></div></div>
+          <span class="skill-bar-pct">45%</span>
+        </div>
+        <div class="skill-bar-row">
+          <span class="skill-bar-name">Power BI</span>
+          <div class="skill-bar-track"><div class="skill-bar-fill" style="width:40%;background:linear-gradient(90deg,var(--purple),var(--pink))"></div></div>
+          <span class="skill-bar-pct">40%</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-label">// Other</div>
+        <div class="skill-bar-row">
+          <span class="skill-bar-name">Godot 4</span>
+          <div class="skill-bar-track"><div class="skill-bar-fill" style="width:40%;background:linear-gradient(90deg,var(--pink),var(--orange))"></div></div>
+          <span class="skill-bar-pct">40%</span>
+        </div>
+        <div class="skill-bar-row">
+          <span class="skill-bar-name">Japanese</span>
+          <div class="skill-bar-track"><div class="skill-bar-fill" style="width:25%;background:linear-gradient(90deg,var(--yellow),var(--cyan))"></div></div>
+          <span class="skill-bar-pct">25%</span>
+        </div>
+      </div>
+
+    </div>
+    <div class="win-resize" data-win="win-skills"></div>
+  </div>
+
+  <!-- ═══ BLOG WINDOW ═══ -->
+  <div class="win" id="win-blog" style="width:360px;top:440px;left:500px;animation-delay:2.3s;">
+    <div class="win-bar" data-win="win-blog">
+      <div class="win-dot dot-close" onclick="closeWin('win-blog')"></div>
+      <div class="win-dot dot-min"   onclick="minWin('win-blog')"></div>
+      <div class="win-dot dot-max"   onclick="maxWin('win-blog')"></div>
+      <span class="win-title">blog.log</span>
+      <div class="win-accent" style="background:var(--purple)"></div>
+    </div>
+    <div class="win-body">
+
+      <div class="blog-post p1">
+        <div class="blog-date">APR 2025</div>
+        <div class="blog-title">Learning Japanese Through Song</div>
+        <p class="blog-excerpt">Breaking down Ryokuoushoku Shakai's "Shout Baby" line by line — how I'm using music to actually understand grammar instead of just memorizing rules.</p>
+        <span class="blog-read">read more →</span>
+      </div>
+
+      <div class="blog-post p2">
+        <div class="blog-date">MAR 2025</div>
+        <div class="blog-title">From Elementor to Gutenberg</div>
+        <p class="blog-excerpt">Hit the Elementor paywall building a school website. Here's what I learned migrating everything to the Kadence theme and Gutenberg blocks.</p>
+        <span class="blog-read">read more →</span>
+      </div>
+
+      <div class="blog-post p3">
+        <div class="blog-date">FEB 2025</div>
+        <div class="blog-title">World-Switching in Godot 4</div>
+        <p class="blog-excerpt">How I built a GLITCHED / PAST world-switching mechanic in a 3D side-scroller — signals, collision layers, and a lot of debugging.</p>
+        <span class="blog-read">read more →</span>
+      </div>
+
+    </div>
+    <div class="win-resize" data-win="win-blog"></div>
+  </div>
+
+</div><!-- /desktop -->
+
+<!-- taskbar -->
+<div id="taskbar">
+  <span class="tb-title">Ahmad.os</span>
+  <button class="tb-btn active" onclick="showWin('win-about')">about.me</button>
+  <button class="tb-btn" onclick="showWin('win-projects')" id="tb-win-projects">projects/</button>
+  <button class="tb-btn" onclick="showWin('win-skills')"   id="tb-win-skills">skills.exe</button>
+  <button class="tb-btn" onclick="showWin('win-blog')"     id="tb-win-blog">blog.log</button>
+  <div class="spacer"></div>
+  <span class="clock" id="clock"></span>
+</div>
+
+<script>
+// ── CLOCK ──
+function updateClock() {
+  const now = new Date();
+  document.getElementById('clock').textContent =
+    now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+}
+updateClock();
+setInterval(updateClock, 1000);
+
+// ── Z-INDEX MANAGEMENT ──
+let zTop = 200;
+function bringToFront(el) {
+  zTop++;
+  el.style.zIndex = zTop;
+  document.querySelectorAll('.win').forEach(w => w.classList.remove('focused'));
+  el.classList.add('focused');
+}
+
+// ── WINDOW CONTROLS ──
+function closeWin(id) {
+  document.getElementById(id).classList.add('minimized');
+  updateTaskbar();
+}
+function minWin(id) {
+  document.getElementById(id).classList.add('minimized');
+  updateTaskbar();
+}
+function maxWin(id) {
+  const win = document.getElementById(id);
+  if (win.dataset.maximized) {
+    win.style.cssText = win.dataset.prev;
+    delete win.dataset.maximized;
+    delete win.dataset.prev;
+  } else {
+    win.dataset.prev = win.style.cssText;
+    win.style.cssText = `width:calc(100vw - 40px);height:calc(100vh - 92px);top:20px;left:20px;`;
+    win.dataset.maximized = '1';
+  }
+  bringToFront(win);
+}
+function showWin(id) {
+  const win = document.getElementById(id);
+  win.classList.remove('minimized');
+  bringToFront(win);
+  updateTaskbar();
+}
+function updateTaskbar() {
+  document.querySelectorAll('.tb-btn').forEach(btn => btn.classList.remove('active'));
+  document.querySelectorAll('.win:not(.minimized)').forEach(win => {
+    const id = win.id;
+    const map = { 'win-about': 0, 'win-projects': 1, 'win-skills': 2, 'win-blog': 3 };
+    const idx = map[id];
+    if (idx !== undefined) {
+      document.querySelectorAll('.tb-btn')[idx + 1]?.classList.add('active');
+    }
+  });
+}
+
+// ── DRAG ──
+document.querySelectorAll('.win-bar').forEach(bar => {
+  let dragging = false, ox = 0, oy = 0;
+  bar.addEventListener('mousedown', e => {
+    if (e.target.classList.contains('win-dot')) return;
+    const win = bar.parentElement;
+    bringToFront(win);
+    dragging = true;
+    ox = e.clientX - win.offsetLeft;
+    oy = e.clientY - win.offsetTop;
+    document.addEventListener('mousemove', onMove);
+    document.addEventListener('mouseup', () => {
+      dragging = false;
+      document.removeEventListener('mousemove', onMove);
+    }, { once: true });
+    function onMove(e) {
+      if (!dragging) return;
+      win.style.left = (e.clientX - ox) + 'px';
+      win.style.top  = Math.max(0, e.clientY - oy) + 'px';
+    }
+  });
+});
+
+// ── RESIZE ──
+document.querySelectorAll('.win-resize').forEach(handle => {
+  let resizing = false, startX, startY, startW, startH;
+  handle.addEventListener('mousedown', e => {
+    e.preventDefault();
+    const win = handle.parentElement;
+    bringToFront(win);
+    resizing = true;
+    startX = e.clientX; startY = e.clientY;
+    startW = win.offsetWidth; startH = win.offsetHeight;
+    document.addEventListener('mousemove', onMove);
+    document.addEventListener('mouseup', () => {
+      resizing = false;
+      document.removeEventListener('mousemove', onMove);
+    }, { once: true });
+    function onMove(e) {
+      if (!resizing) return;
+      win.style.width  = Math.max(280, startW + e.clientX - startX) + 'px';
+      win.style.height = Math.max(180, startH + e.clientY - startY) + 'px';
+    }
+  });
+});
+
+// ── FOCUS ON CLICK ──
+document.querySelectorAll('.win').forEach(win => {
+  win.addEventListener('mousedown', () => bringToFront(win));
+});
+
+// taskbar init
+updateTaskbar();
+</script>
+</body>
 </html>
